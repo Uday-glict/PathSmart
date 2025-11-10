@@ -37,7 +37,7 @@ if (!fs.existsSync(uploadDir)) {
 }
 
 app.use(express.json());
-
+module.exports = app;
 /**
  * POST /api/admin/guide/analyze
  * Dedicated endpoint for AI analysis. Returns resilient coordinates, but does NOT save to DB.
