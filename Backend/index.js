@@ -33,10 +33,10 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 // ✅ Ensure Upload Directory Exists
-const uploadDir = path.join(__dirname, "public/uploads");
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
-}
+// const uploadDir = path.join(__dirname, "public/uploads");
+// if (!fs.existsSync(uploadDir)) {
+//   fs.mkdirSync(uploadDir, { recursive: true });
+// }
 
 // ✅ Test Route
 app.get("/", (req, res) => {
