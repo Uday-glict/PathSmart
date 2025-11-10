@@ -1,20 +1,16 @@
 {
   "name": "backend_pathai",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-  "start": "node index.js"
-   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+    "start": "node index.js"
+  },
   "dependencies": {
     "@google/genai": "^1.27.0",
     "cors": "^2.8.5",
-    "dotenv": "^17.2.3",
+    "dotenv": "^16.4.5",
     "express": "^5.1.0",
     "mysql2": "^3.15.3",
-    "node-modules": "^1.0.1"
+    "body-parser": "^1.20.2"
   }
 }
