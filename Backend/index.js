@@ -23,7 +23,9 @@ const corsOptions = {
   origin: [
     "http://localhost:5173",
     "http://localhost:3000",
-    "http://192.168.1.100:3000"
+    "http://192.168.1.100:3000",
+    "https://path-smart-66y8.vercel.app/",
+    "https://path-smart-ui.vercel.app/"
   ],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
