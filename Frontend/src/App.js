@@ -6,8 +6,8 @@ import GuideOverlayMain from './Guide_Overlay/GuideOverlayMain';
 function App() {
   return (
     <div className="App">
-      <GuideOverlayMain />
-      {/* <AdminStepCreator /> */}
+      {/* <GuideOverlayMain /> */}
+      <AdminStepCreator />
       {/* <AdminGuideBuilder /> */}
       {/* <AIHelperWidget /> */}
     </div>
