@@ -2,7 +2,7 @@ import React, { useState, useCallback, useRef, memo } from "react";
 // Note: axios is not needed, using native fetch for simplicity and consistency.
 
 // --- Configuration ---
-const BASE_URL = "http://localhost:3000/api/admin";
+const BASE_URL = "https://path-smart.vercel.app/api/admin";
 const MOCK_GUIDE_ID = 101; 
 // AI reference viewport size (must match backend's assumption in server.js)
 const IFRAME_WIDTH = 1000;
