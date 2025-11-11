@@ -86,7 +86,7 @@ app.post("/api/admin/guide/analyze", async (req, res) => {
 });
 
 // ✅ ============ Guide CRUD + AI Routes ============
-app.post("/api/admin/guides", async (req, res) => {
+app.post("/api/admin/guide", async (req, res) => {
   const { name, description, type, module_name, target_audience, created_by } = req.body;
   try {
     const [r] = await pool.execute(
