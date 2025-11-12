@@ -52,38 +52,7 @@ You are an expert element locator tool. Your task is to analyze a webpage contex
 Respond ONLY with a single string: "x:<num>,y:<num>,w:<num>,h:<num>".
 `;
 
-app.post("/api/admin/guide/analyze", async (req, res) => {
-  const { target_page_url, target_element_description, selection_coords } = req.body;
-  if (!target_page_url || !target_element_description || !selection_coords)
-    return res.status(400).json({ error: "Missing required analysis data." });
 
-  try {
-    const userPrompt = `
-    Page: "${target_page_url}".
-    Description: "${target_element_description}".
-    User Selection: "${selection_coords}".
-    Refine coordinates based on description.
-    `;
-
-    const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash-preview-09-2025",
-      contents: [{ role: "user", parts: [{ text: userPrompt }] }],
-      config: { systemInstruction: { parts: [{ text: SYSTEM_INSTRUCTION }] } },
-    });
-
-    const textResponse = response.candidates[0]?.content?.parts?.[0]?.text;
-    if (!textResponse) throw new Error("Gemini returned an empty response.");
-
-    const aiCoordinates = textResponse.trim().replace(/`/g, "");
-    if (!aiCoordinates.match(/^x:\d+,y:\d+,w:\d+,h:\d+$/))
-      throw new Error(`AI returned invalid format: ${aiCoordinates}`);
-
-    res.json({ success: true, ai_coordinates: aiCoordinates });
-  } catch (e) {
-    console.error("Gemini Error:", e.message);
-    res.status(500).json({ error: "AI coordinate generation failed." });
-  }
-});
 
 // ✅ ============ Guide CRUD + AI Routes ============
 // app.post("/api/admin/guide", async (req, res) => {
@@ -126,6 +95,39 @@ app.post("/api/admin/guides/:guideId/step", async (req, res) => {
   } catch (e) {
     console.error(e);
     res.status(500).json({ error: "Failed to save step." });
+  }
+});
+
+app.post("/api/admin/guide/analyze", async (req, res) => {
+  const { target_page_url, target_element_description, selection_coords } = req.body;
+  if (!target_page_url || !target_element_description || !selection_coords)
+    return res.status(400).json({ error: "Missing required analysis data." });
+
+  try {
+    const userPrompt = `
+    Page: "${target_page_url}".
+    Description: "${target_element_description}".
+    User Selection: "${selection_coords}".
+    Refine coordinates based on description.
+    `;
+
+    const response = await ai.models.generateContent({
+      model: "gemini-2.5-flash-preview-09-2025",
+      contents: [{ role: "user", parts: [{ text: userPrompt }] }],
+      config: { systemInstruction: { parts: [{ text: SYSTEM_INSTRUCTION }] } },
+    });
+
+    const textResponse = response.candidates[0]?.content?.parts?.[0]?.text;
+    if (!textResponse) throw new Error("Gemini returned an empty response.");
+
+    const aiCoordinates = textResponse.trim().replace(/`/g, "");
+    if (!aiCoordinates.match(/^x:\d+,y:\d+,w:\d+,h:\d+$/))
+      throw new Error(`AI returned invalid format: ${aiCoordinates}`);
+
+    res.json({ success: true, ai_coordinates: aiCoordinates });
+  } catch (e) {
+    console.error("Gemini Error:", e.message);
+    res.status(500).json({ error: "AI coordinate generation failed." });
   }
 });
 
