@@ -55,21 +55,21 @@ Respond ONLY with a single string: "x:<num>,y:<num>,w:<num>,h:<num>".
 
 
 // ✅ ============ Guide CRUD + AI Routes ============
-// app.post("/api/admin/guide", async (req, res) => {
-//   const { name, description, type, module_name, target_audience, created_by } = req.body;
-//   try {
-//     const [r] = await pool.execute(
-//       `INSERT INTO adminguide 
-//       (name, description, type, module_name, target_audience, created_by)
-//       VALUES (?, ?, ?, ?, ?, ?)`,
-//       [name ?? null, description ?? null, type ?? "global", module_name ?? null, target_audience ?? "all", created_by ?? 1]
-//     );
-//     res.json({ guide_id: r.insertId });
-//   } catch (err) {
-//     console.error("❌ Database Insert Error:", err);
-//     res.status(500).json({ error: "Failed to create guide." });
-//   }
-// });
+app.post("/api/admin/guide", async (req, res) => {
+  const { name, description, type, module_name, target_audience, created_by } = req.body;
+  try {
+    const [r] = await pool.execute(
+      `INSERT INTO adminguide 
+      (name, description, type, module_name, target_audience, created_by)
+      VALUES (?, ?, ?, ?, ?, ?)`,
+      [name ?? null, description ?? null, type ?? "global", module_name ?? null, target_audience ?? "all", created_by ?? 1]
+    );
+    res.json({ guide_id: r.insertId });
+  } catch (err) {
+    console.error("❌ Database Insert Error:", err);
+    res.status(500).json({ error: "Failed to create guide." });
+  }
+});
 
 app.post("/api/admin/guide/:guideId/step", async (req, res) => {
   const { guideId } = req.params;
