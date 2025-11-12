@@ -71,7 +71,7 @@ Respond ONLY with a single string: "x:<num>,y:<num>,w:<num>,h:<num>".
 //   }
 // });
 
-app.post("/api/admin/guides/:guideId/step", async (req, res) => {
+app.post("/api/admin/guide/:guideId/step", async (req, res) => {
   const { guideId } = req.params;
   const {
     step_number, title, content, target_page_url,
@@ -130,7 +130,6 @@ app.post("/api/admin/guide/analyze", async (req, res) => {
     res.status(500).json({ error: "AI coordinate generation failed." });
   }
 });
-
 app.get("/api/admin/guides/:guideId", async (req, res) => {
   const { guideId } = req.params;
   try {
